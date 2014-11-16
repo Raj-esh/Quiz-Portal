@@ -1,0 +1,90 @@
+doctype html
+html
+	head
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		script(type='text/javascript', src='/javascripts/jquery-ui-1.8.14.custom.min.js')
+		script(type='text/javascript').
+			$(function() {
+				$('#byme1').change(function(){
+					var quizid = $(this).val();
+					$('#display').load('/Quiz/getdetails',{quizid : quizid});
+				});
+				
+			});
+	body
+		if toopen == 'addupdate_user'
+			form(method='POST', action='/Quiz/ManageUser')
+				div
+					h1(align='Center') Give access to New User or Update User Role
+					br
+					br
+					table(class = 'table', align='center', margin='auto', border='0',style='font-size: 20px;max-width:50%;background-color:transparent;')
+						tr
+							td(style='float:right;') EMail Id  :
+							td
+								input(id='emails', type='text',name='emails', required , autocomplete='off')
+						tr
+							td(style='float:right;') Role Id :
+							td 
+								select(name='roleid')
+									option(value='0') 0
+									option(value='1') 1
+									option(value='2') 2
+				
+			
+					h4(align='Center') Role Id must be 0 for user, 1 for Quiz admin and 2 for Portal Admin
+					p(align='Center')
+						input(type='submit', value='Add/Update', style='margin: 20px auto;', class='btn btn-lg btn-success')
+			
+		if toopen == 'addusertoquiz'
+			form(method='POST', action='/Quiz/addusertoquiz')
+				div
+					table(class = 'table', align='center', margin='auto', border='0',style='font-size: 20px;max-width:50%;background-color:transparent;')
+						if open_quiz_count != 0
+							h1(align='Center') Add an User to an Open QuiZ
+							br
+							br
+							tr
+								td(style='float:right;') EMail Id  :
+								td
+									input(id='emails', type='text',name='emails', required , autocomplete='off')
+							tr
+								td(style='float:right;') Select Quiz :
+								td 
+									select(style='font-size: 20px;', class='btn btn-lg', name = 'Quiz_Id')
+										- for (var i in addusertoquiz) {
+											option(value='#{addusertoquiz[i].QUIZ_ID}') #{addusertoquiz[i].QUIZ_NAME}
+										-}
+						else
+							h4(align='Center') You don't have any open Quiz scheduled by you to use this Function.
+					if open_quiz_count != 0
+						p(align='Center')
+							input(type='submit', value='Add to the Quiz', style='margin: 20px auto;',class='btn btn-lg btn-success')
+						
+		if toopen == 'testsscheduledbyme'
+			h1(align='Center') Select a Quiz to see the Details
+			br
+			select#byme1(style='font-size: 25px;margin: 20px auto;float:left', class='btn btn-lg')
+				option(value='select', selected='selected') Select
+				- for (var i in quiz) {
+					option(value='#{quiz[i].QUIZ_ID}') #{quiz[i].QUIZ_NAME}
+				-}
+			div#display
+		
+		if toopen == 'testsihadattempted'
+			h1(align='Center') Scores for the tests you have appeared for
+			br
+			table(class = 'table table-striped', align='center', margin='auto', border='0',style='font-size: 20px;')
+				thead
+					tr
+						th Quiz Name
+						th Your Score
+						th Topper Name
+						th Topper Score
+				- for (var i in score) {
+					tr
+						td #{score[i].QUIZ_NAME}
+						td #{score[i].QUIZ_SCORE}
+						td(style='font-style: italic') #{score[i].USER_EMAIL_ID}
+						td(style='font-style: italic') #{score[i].MAXSCORE}
+				- }

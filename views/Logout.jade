@@ -1,0 +1,44 @@
+doctype html
+html
+	head
+		meta(http-equiv="X-UA-Compatible",content="IE=edge")
+		
+		title Logged Out
+		link(href='/stylesheets/bootstrap.min.css',rel='stylesheet')
+		link(href='/stylesheets/cover.css' rel='stylesheet')
+		link(href='/stylesheets/jumbotron-narrow.css',rel='stylesheet')
+
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		
+		|<!--[if lt IE 9]>
+		|	<script src="/javascripts/html5shiv.min.js"></script>
+		|	<script src="/javascripts/respond.min.js"></script>
+		|<![endif]-->
+		
+		script(type='text/javascript').
+			$(function() {
+					$("#home1").click(function(){
+					$('#home').submit();
+				});
+				
+				$('#done').click(function(){
+					window.close();
+				});
+			});
+
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				.cover-container
+					.inner.cover
+						div.container
+							div.jumbotron
+								h1(style='font-size: 50px;') You have successfully logged out.
+								p
+									input#done(type='button', value='Close the tab', style='margin: 20px auto;', class='btn btn-lg btn-success')
+						
+								form#home(action='/Quiz/SignIn', method='GET')
+									a#home1(href='#', style='float:auto;margin-right:1cm;font-size: 15px;')
+										span.glyphicon.glyphicon-home  Login
+										
+		

@@ -1,0 +1,16 @@
+h1(align='Center') Scores for the tests you have appeared for
+	br
+	table(class = 'table table-striped', align='center', margin='auto', border='0',style='font-size: 20px;')
+		thead
+			tr
+				th(align='center') Quiz Name
+				th Your Score
+				th Topper Name
+				th Topper Score
+		- for (var i in score) {
+			tr
+				td(align='left') #{score[i].QUIZ_NAME}
+				td(align='left') #{score[i].QUIZ_SCORE}
+				td(align='left')(style='font-style: italic') #{score[i].USER_EMAIL_ID}
+				td(align='left')(style='font-style: italic') #{score[i].MAXSCORE}
+		- }

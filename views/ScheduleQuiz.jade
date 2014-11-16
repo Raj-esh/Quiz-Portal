@@ -1,0 +1,47 @@
+doctype html
+html
+	head
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		script(type='text/javascript', src='/javascripts/jquery-ui-1.8.14.custom.min.js')
+		script(type='text/javascript').
+			$(function() {
+				$( "#datepickerfrom" ).datepicker({ dateFormat: "yy-mm-dd" ,minDate: 0, maxDate: "+1M +10D" });
+				$( "#datepickerto" ).datepicker({ dateFormat: "yy-mm-dd" ,minDate: 0, maxDate: "+1M +10D" });
+				
+			});
+
+	body
+		form(method='GET', action='/Quiz/setquiz')
+			div
+				h1(align='Center') Schedule a Quiz
+				br
+				br
+				table(class = 'table', margin='auto', border='0',style='font-size: 20px;max-width:70%;background-color:transparent;')
+					tr
+						td(style='float:right;') Quiz Name
+						td
+							input(type='text',required='required', name='Quiz_name', autocomplete='off')
+					tr
+						td(style='float:right;') Max. No. of questions
+						td 
+							input(type='number',required='required', name='Question_count')
+					tr
+						td(style='float:right;') Max. Time For the Quiz in Minutes
+						td
+							input(type='number',required='required', name='Time')
+					tr
+						td(style='float:right;') Valid From
+						td
+							input(type='text',id='datepickerfrom',required='required', name='from', autocomplete='off')
+					tr
+						td(style='float:right;') Valid To
+						td
+							input(type='text',id='datepickerto',required='required', name='to', autocomplete='off')
+				br
+				h4 Enter the Mail Id's who can take the Quiz(Semicolon Seperated):
+				br
+				textarea(id='emails', rows='7', cols='150',name='emails', required)
+				br
+				p(align='Center')
+					input(type='submit', value='Schedule', style='margin: 20px auto;float:auto;', class='btn btn-lg btn-success')
+

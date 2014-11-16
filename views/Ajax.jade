@@ -1,0 +1,11 @@
+div#count(style='text-align:left;')
+	p 1. Total No. of Questions in this Quiz : #{TOTAL_QUESTIONS}
+	p 2. Time assigned for this quiz : #{DURATION} minutes
+	p 3. You can attempt the quiz only once.
+	p 4. Quiz will be auto submitted after the alloted time has finished.
+	p 5. Please click the 'Finish' button only when you have attempted all the questions. 
+	p 6. There is no negative marking.
+	p 7. Please don't close or refresh the browser in between. Doing so you will not be able to complete the test further.
+	p(style='color:red;') Please don't try to move out of Page by any means(ALT+TAB, ALT+CTRL+TAB etc). Doing so, trust us your Quiz will be auto submitted.
+	form#form1(action='/Quiz/Quiz',method='GET')
+		input(type = 'hidden' , value= '#{quiz_id}', name = 'quiz_id')

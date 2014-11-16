@@ -1,0 +1,53 @@
+body
+	if count == 1
+		div
+			-var j=1;
+			-var k=1;
+			ol(type ='1')
+				- for (var i in rows) {
+					-var question = 'question' + i;
+					li
+						div
+							h4(style = 'color:#666666;') #{rows[i].question_text}
+							-var radio = 'radio' + i;
+							-k = k+1;
+							if rows[i].answer_key == 1 
+								p(style = 'color:green;font-style:italic;')
+									input(type='radio', name = radio, value=1, id = '#{k}', disabled)
+									label #{rows[i].option1}
+							else
+								p(style = 'color:#999999;')
+									input(type='radio', name = radio, value=1, id = '#{k}', disabled)
+									label #{rows[i].option1}
+							
+							-k = k+1;
+							if rows[i].answer_key == 2
+								p(style = 'color:green;font-style:italic;')
+									input(type='radio', name = radio, value=2, id = '#{k}', disabled)
+									label #{rows[i].option2}
+							else
+								p(style = 'color:#999999;')
+									input(type='radio', name = radio, value=2, id = '#{k}', disabled)
+									label #{rows[i].option2}
+							-k = k+1;
+							if rows[i].answer_key == 3
+								p(style = 'color:green;font-style:italic;')
+									input(type='radio', name = radio, value=3, id = '#{k}', disabled)
+									label #{rows[i].option2}
+							else
+								p(style = 'color:#999999;')
+									input(type='radio', name = radio, value=3, id = '#{k}', disabled)
+									label #{rows[i].option3}
+							-k = k+1;
+							if rows[i].answer_key == 4
+								p(style = 'color:green;font-style:italic;')
+									input(type='radio', name = radio, value=4, id = '#{k}', disabled)
+									label #{rows[i].option2}
+							else
+								p(style = 'color:#999999;')
+									input(type='radio', name = radio, value=4, id = '#{k}', disabled)
+									label #{rows[i].option4}
+					-j=j+1;
+				- }
+	if count == 0
+		h1 No Questions Available for this Quiz.

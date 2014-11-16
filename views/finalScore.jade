@@ -1,0 +1,97 @@
+doctype html
+html
+	head
+		meta(http-equiv="X-UA-Compatible",content="IE=edge")
+		
+		title Final Score
+		link(href='/stylesheets/bootstrap.min.css',rel='stylesheet')
+		link(href='/stylesheets/jumbotron-narrow.css',rel='stylesheet')
+		link(href='/stylesheets/cover.css' rel='stylesheet')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui-1.8.14.custom.css')
+		
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		script(type='text/javascript', src='/javascripts/jquery-ui-1.8.14.custom.min.js')
+		
+		|<!--[if lt IE 9]>
+		|	<script src="/javascripts/html5shiv.min.js"></script>
+		|	<script src="/javascripts/respond.min.js"></script>
+		|<![endif]-->
+		
+		script(type='text/javascript').
+			function DisableBackButton() {
+				window.history.forward()
+			}
+			DisableBackButton();
+			window.onload = DisableBackButton;
+			window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+			window.onunload = function() { void (0) }
+		
+		script(type='text/javascript').
+			$(function() {
+				$('#dialog').dialog({
+					autoOpen: false,
+					width: 400,
+					modal: true,
+					resizable: false,
+					//show: "blind",
+					//hide: "explode",
+					buttons: {
+						"Ok": function() { 
+							$(this).dialog("close");
+							window.location.href='/Quiz/Logout';
+							//window.close();
+							
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}
+				});
+				
+								
+				// Dialog Link
+				$('#done').click(function(){
+					$('#dialog').dialog('open');
+					return false;
+				});
+				
+				$('#done1').click(function(){
+					$('#dialog').dialog('open');
+					return false;
+				});
+
+
+
+			});
+	body
+		.navbar.navbar-inverse.navbar-fixed-top(role="navigation",style='font-size: 15px;')
+				.container-fluid
+					.navbar-header
+						a.navbar-brand(href="/Quiz/Welcome") Quest
+					.navbar-collapse.collapse
+						ul.nav.navbar-nav.navbar-right
+							li
+								a(href="/Quiz/Welcome") Home
+							li
+								a#done(href="") Logout
+		.site-wrapper
+			.site-wrapper-inner
+				.cover-container
+					.inner.cover
+						span.glyphicon.glyphicon-user(style='float:auto;font-size: 15px;')&nbsp;
+						span(style='font-size: 15px;font-style:oblique;}')&nbsp;ThanQ #{username}...!!
+						br
+						
+								
+						div.container
+							div.jumbotron
+								h1 You Have Scored.. #{score} out of #{count}
+
+								p
+									input#done1(type='button', value='I am Done..!!', style='margin: 20px auto;', class='btn btn-lg btn-success') 
+
+						div.footer
+							p(style='float:right;') &copy; SBCSHOTS Quiz Portal 2014
+		div#dialog(title='Confirm')
+			span#iam Are you sure that you want to close ?
+		

@@ -1,0 +1,16 @@
+html
+	head
+		title login
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		
+	body
+		form#login(action='/Quiz/Welcome', method='POST')
+			
+			input(type='hidden', class='login', name='username', value = '#{username}') 
+			input(type='submit', value='Submit', style="float:right; visibility:hidden")
+	
+		script(type='text/javascript').
+			
+			$(document).ready(function(){
+				$("#login").submit();
+			});

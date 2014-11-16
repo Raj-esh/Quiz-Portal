@@ -1,0 +1,11 @@
+div
+	table(class = 'table table-striped', align='center', margin='auto', border='0',style='font-size: 20px;')
+		thead
+			tr
+				th User Email
+				th Score
+		- for (var i in details) {
+			tr
+				td #{details[i].USER_EMAIL_ID}
+				td #{details[i].QUIZ_SCORE}
+		- }

@@ -1,0 +1,112 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible",content="IE=edge")
+		title Previous Tests
+		link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+		link(href="/stylesheets/dashboard.css", rel="stylesheet")
+		link(rel='stylesheet', href='/stylesheets/jquery-ui-1.8.14.custom.css')
+		link(href='/stylesheets/cover1.css' rel='stylesheet')
+
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		script(type='text/javascript', src='/javascripts/jquery-ui-1.8.14.custom.min.js')
+		
+		|<!--[if lt IE 9]>
+		|	<script src="/javascripts/html5shiv.min.js"></script>
+		|	<script src="/javascripts/respond.min.js"></script>
+		|<![endif]-->
+		
+		script(type='text/javascript').
+			function killCopy(e){
+				return false;
+			}
+			function reEnable(){
+				return true;
+			}
+			document.onselectstart = new Function("return false");
+			if (window.sidebar){
+				document.onmousedown = killCopy;
+				document.onclick = reEnable;	
+			}
+			
+			
+			$(function() {
+		
+				$("#logout").click(function(){
+					$('#exit').dialog('open');
+					return false;
+				});
+					
+				$('#exit').dialog({
+					autoOpen: false,
+					width: 400,
+					modal: true,
+					resizable: false,
+					//show: "blind",
+					//hide: "explode",
+					buttons: {
+						"Yes": function() { 
+							$(this).dialog("close");
+							window.location.href='/Quiz/Logout';
+							//window.close();
+						}, 
+						"No": function() { 
+							$(this).dialog("close"); 
+						} 
+					}
+				});
+		
+				
+				$('.quizid').click(function(){
+					var quizid = $(this).attr('id');
+					$('#apple').load('/Quiz/MyAttempts',{quizid : quizid});
+				});
+
+				
+			});
+
+	body
+		.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+			.container-fluid
+				.navbar-header
+					a.navbar-brand(href="/Quiz/Welcome") Quest
+				.navbar-collapse.collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href="/Quiz/Welcome") Home
+						li
+							a#logout(href="") Logout
+
+		.container-fluid
+			.row
+				.col-sm-3.col-md-2.sidebar
+					ul.nav.nav-sidebar
+						li.active
+							a(href="#") Closed Tests
+						- for (var i in quiz) {
+							-var count =0;
+							-for(var j in rows){
+								if quiz[i].QUIZ_ID == rows[j].QUIZ_ID
+									-count = 1;
+							-}
+							li
+								-if (count == 1)
+									a.quizid(href="#", id='#{quiz[i].QUIZ_ID}', style = 'color:green;font-style:Italic;') #{quiz[i].QUIZ_NAME}
+								-else
+									a.quizid(href="#", id='#{quiz[i].QUIZ_ID}', style = 'color:red;') #{quiz[i].QUIZ_NAME}
+							
+						- }
+								
+				.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+					h3(id = 'header')  Quiz Answers
+					span.page-header(style = 'color:#E67373;font-style:Italic;') Correct Answers : &nbsp;&nbsp; 
+					span.page-header(style = 'color:green;font-style:Italic;') In Green  
+					p.page-header(style = 'color:#E67373;font-style:Italic;') Your Answers &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;
+						span(style = 'color:#A67373;font-style:Italic;') Checked in as &nbsp;
+						input(type='radio',checked,disabled)
+						span(style = 'color:#A67373;font-style:Italic;') .&nbsp;If you haven't answered the Question all the radio buttons of the question will remain Unchecked. 
+					
+					div#apple
+		div#exit(title='Confirm')
+			span#iam Are you sure that you want to Logout ?

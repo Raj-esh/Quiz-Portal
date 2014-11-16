@@ -1,0 +1,12 @@
+doctype html
+html
+	head
+		title Welcome
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		h2 Welcome #{username}
+		h1 Instructions
+		br
+		p Yet to be given
+		form(action='/Quiz/Quiz', method='get')
+			input(type='submit', value='Submit')

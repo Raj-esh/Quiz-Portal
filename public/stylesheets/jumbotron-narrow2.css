@@ -1,0 +1,44 @@
+/* Space out content a bit */
+body {
+  padding-top: 0px;
+  padding-bottom: 20px;
+   height: 100%;
+  background-color: #F5FFF5;
+}
+
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 675px;
+	float:auto;
+	}
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  float:auto;
+  
+}
+.jumbotron .btn {
+  padding: 10px 24px;
+  font-size: 21px;
+}
+
+
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+
+.container .jumbotron{
+	padding-left:60px;
+	padding-right:60px
+}
+
+.jumbotron p{
+	font-size:16px;
+	font-weight:200;
+}
